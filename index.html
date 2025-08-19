@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Betting Exchange Profit Simulator</title>
+    </head>
+    <body class="bg-gray-900 text-gray-200">
+        <div class="container mx-auto p-4 md:p-8 max-w-4xl">
+            <header class="text-center mb-10">
+                <h1 class="text-4xl font-bold text-white">
+                    Long-Term Betting Exchange Profit Simulator
+                </h1>
+                <p class="text-lg text-gray-400 mt-2">
+                    Model the long-term performance of your trading strategies.
+                </p>
+            </header>
+
+            <!-- Long-Term Profit Simulator -->
+            <div class="bg-gray-800 p-6 rounded-lg shadow-lg mb-8">
+                <h2 class="text-3xl font-semibold mb-6 text-white text-center">
+                    Simulation Parameters
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div>
+                        <label
+                            for="sim-bankroll"
+                            class="block text-sm font-medium text-gray-400"
+                            >Initial Bankroll (£)</label
+                        >
+                        <input
+                            type="number"
+                            id="sim-bankroll"
+                            value="1000"
+                            class="mt-1 w-full bg-gray-700 p-2 rounded border border-gray-600 focus:ring-teal-500 focus:border-teal-500"
+                        />
+                    </div>
+                    <div>
+                        <label
+                            for="sim-stake"
+                            class="block text-sm font-medium text-gray-400"
+                            >Avg. Stake (£)</label
+                        >
+                        <input
+                            type="number"
+                            id="sim-stake"
+                            value="10"
+                            class="mt-1 w-full bg-gray-700 p-2 rounded border border-gray-600 focus:ring-teal-500 focus:border-teal-500"
+                        />
+                    </div>
+                    <div>
+                        <label
+                            for="sim-win-rate"
+                            class="block text-sm font-medium text-gray-400"
+                            >Win Rate (%)</label
+                        >
+                        <input
+                            type="number"
+                            id="sim-win-rate"
+                            value="55"
+                            class="mt-1 w-full bg-gray-700 p-2 rounded border border-gray-600 focus:ring-teal-500 focus:border-teal-500"
+                        />
+                    </div>
+                    <div>
+                        <label
+                            for="sim-avg-win"
+                            class="block text-sm font-medium text-gray-400"
+                            >Avg. Profit per Win (£)</label
+                        >
+                        <input
+                            type="number"
+                            id="sim-avg-win"
+                            value="9.5"
+                            class="mt-1 w-full bg-gray-700 p-2 rounded border border-gray-600 focus:ring-teal-500 focus:border-teal-500"
+                        />
+                    </div>
+                    <div>
+                        <label
+                            for="sim-avg-loss"
+                            class="block text-sm font-medium text-gray-400"
+                            >Avg. Loss per Loss (£)</label
+                        >
+                        <input
+                            type="number"
+                            id="sim-avg-loss"
+                            value="10"
+                            class="mt-1 w-full bg-gray-700 p-2 rounded border border-gray-600 focus:ring-teal-500 focus:border-teal-500"
+                        />
+                    </div>
+                    <div>
+                        <label
+                            for="sim-trades"
+                            class="block text-sm font-medium text-gray-400"
+                            >Number of Trades</label
+                        >
+                        <input
+                            type="number"
+                            id="sim-trades"
+                            value="500"
+                            class="mt-1 w-full bg-gray-700 p-2 rounded border border-gray-600 focus:ring-teal-500 focus:border-teal-500"
+                        />
+                    </div>
+                </div>
+                <div class="mt-6">
+                    <button
+                        id="run-simulation-btn"
+                        class="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-300 text-lg"
+                    >
+                        Run Simulation
+                    </button>
+                </div>
+                <div class="mt-6">
+                    <canvas id="simulation-chart"></canvas>
+                </div>
+                <div
+                    id="simulation-results"
+                    class="mt-4 grid grid-cols-1 md:grid-cols-3 text-center gap-4"
+                >
+                    <!-- Simulation results will be populated here -->
+                </div>
+            </div>
+        </div>
+        <script type="module" src="/src/main.js"></script>
+    </body>
+</html>
