@@ -88,11 +88,11 @@ document.addEventListener("DOMContentLoaded", () => {
     simResultsEl.innerHTML = `
                   <div>
                       <p class="text-gray-400 text-sm">Final Bankroll</p>
-                      <p class="text-2xl font-bold ${color}">£${final.toFixed(2)}</p>
+                      <p class="text-2xl font-bold ${color}">€${final.toFixed(2)}</p>
                   </div>
                   <div>
                       <p class="text-gray-400 text-sm">Total Profit/Loss</p>
-                      <p class="text-2xl font-bold ${color}">£${profit.toFixed(2)}</p>
+                      <p class="text-2xl font-bold ${color}">€${profit.toFixed(2)}</p>
                   </div>
                   <div>
                       <p class="text-gray-400 text-sm">Return on Investment</p>
@@ -145,12 +145,12 @@ document.addEventListener("DOMContentLoaded", () => {
           y: {
             title: {
               display: true,
-              text: "Bankroll (£)",
+              text: "Bankroll (€)",
               color: "#9ca3af",
             },
             ticks: {
               color: "#9ca3af",
-              callback: (value) => `£${value.toFixed(2)}`,
+              callback: (value) => `€${value.toFixed(2)}`,
             },
           },
         },
