@@ -18,34 +18,31 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- SIMULATION LOGIC ---
   function runSimulation() {
     const initialBankroll = parseFloat(simBankrollInput.value);
-    const avgStake = parseFloat(simStakeInput.value);
+    const stakePercent = parseFloat(simStakeInput.value) / 100;
     const winRate = parseFloat(simWinRateInput.value) / 100;
     const numTrades = parseInt(simTradesInput.value);
-    const profitPerWin = parseFloat(simAvgWinInput.value);
-    const lossPerLoss = parseFloat(simAvgLossInput.value);
+    const profitPercent = parseFloat(simAvgWinInput.value) / 100;
+    const lossPercent = parseFloat(simAvgLossInput.value) / 100;
 
     // Enhanced validation
     if (
       isNaN(initialBankroll) ||
-      isNaN(avgStake) ||
+      isNaN(stakePercent) ||
       isNaN(winRate) ||
       isNaN(numTrades) ||
-      isNaN(profitPerWin) ||
-      isNaN(lossPerLoss) ||
+      isNaN(profitPercent) ||
+      isNaN(lossPercent) ||
       initialBankroll <= 0 ||
-      avgStake <= 0 ||
+      stakePercent <= 0 ||
       winRate < 0 ||
       winRate > 1 ||
       numTrades <= 0 ||
-      profitPerWin < 0 ||
-      lossPerLoss < 0
+      profitPercent < 0 ||
+      lossPercent < 0
     ) {
-      alert("Please enter valid simulation parameters. All values must be positive, and win rate must be between 0-100%.");
-      return;
-    }
-
-    if (avgStake > initialBankroll) {
-      alert("Average stake cannot be larger than initial bankroll.");
+      alert(
+        "Please enter valid simulation parameters. All values must be positive, and win rate must be between 0-100%.",
+      );
       return;
     }
 
@@ -54,28 +51,35 @@ document.addEventListener("DOMContentLoaded", () => {
     let winCount = 0;
 
     for (let i = 0; i < numTrades; i++) {
+      const currentStake = bankroll * stakePercent;
+
       // Check if bankroll can cover the stake
-      if (bankroll < avgStake) {
+      if (bankroll < currentStake) {
         // If bankroll is insufficient, end simulation early
         break;
       }
 
       if (Math.random() < winRate) {
-        bankroll += profitPerWin;
+        bankroll += currentStake * profitPercent;
         winCount++;
       } else {
-        bankroll -= lossPerLoss;
+        bankroll -= currentStake * lossPercent;
       }
-      
+
       // Prevent negative bankroll
       bankroll = Math.max(0, bankroll);
       bankrollHistory.push(bankroll);
-      
+
       // Stop if bankroll reaches zero
       if (bankroll === 0) break;
     }
 
-    displaySimulationResults(initialBankroll, bankroll, winCount, bankrollHistory.length - 1);
+    displaySimulationResults(
+      initialBankroll,
+      bankroll,
+      winCount,
+      bankrollHistory.length - 1,
+    );
     drawSimulationChart(bankrollHistory);
   }
 
@@ -83,7 +87,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const profit = final - initial;
     const roi = initial > 0 ? (profit / initial) * 100 : 0;
     const color = profit >= 0 ? "text-green-400" : "text-red-400";
-    const actualWinRate = actualTrades > 0 ? (winCount / actualTrades) * 100 : 0;
+    const actualWinRate =
+      actualTrades > 0 ? (winCount / actualTrades) * 100 : 0;
 
     simResultsEl.innerHTML = `
                   <div>
